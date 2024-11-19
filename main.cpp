@@ -132,7 +132,7 @@ void setup(){
   display.clearDisplay();
   display.setTextSize(1);      
   display.setTextColor(SSD1306_WHITE);  
-  display.setCursor(0, 0);
+  display.setCursor(30, 30);
   animation();
   delay(1000);
   display.clearDisplay();     
@@ -156,14 +156,14 @@ void setup(){
     animation();
     delay(500);
     display.clearDisplay(); 
-    display.setCursor(0, 10);  
+    display.setCursor(35, 30);  
     display.print("IP: ");
     display.print(WiFi.localIP()); 
     display.display(); 
   } else {
     Serial.println("\nFalha ao conectar ao Wi-Fi");
     display.clearDisplay();  
-    display.setCursor(0, 10);
+    display.setCursor(35, 30);
     display.print("Falha Wi-Fi");
     display.display(); 
   }
@@ -181,13 +181,25 @@ void loop() {
   client.flush();
 
   if (request.indexOf("/LEDazul=ON") != -1) {
-    digitalWrite(ledPinazul, HIGH); 
+    digitalWrite(ledPinazul, HIGH);
+    animation();
+    delay(500);
+    display.clearDisplay();
+    display.setCursor(35, 30);
+    display.print(WiFi.localIP());
+    display.display(); 
   } else if (request.indexOf("/LEDazul=OFF") != -1) {
     digitalWrite(ledPinazul, LOW); 
   }
 
   if(request.indexOf("/LEDamarelo=ON") != -1){
     digitalWrite(ledPinamarelo, HIGH);
+    animation();
+    delay(500);
+    display.clearDisplay();
+    display.setCursor(35, 30);
+    display.print(WiFi.localIP()); 
+    display.display();
   } else if(request.indexOf("/LEDamarelo=OFF") != -1){
     digitalWrite(ledPinamarelo, LOW);
   }
@@ -212,7 +224,6 @@ void loop() {
   html += "<main>";
   html += "<button class=\"on\" onclick=\"location.href='/LEDazul=ON'\">Ligar LED Azul</button>";
   html += "<button class=\"off\" onclick=\"location.href='/LEDazul=OFF'\">Desligar LED Azul</button>";
-  html += "<img src='https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTVxd2JudnpiMmx6YngwbW1vcmVkb3Vkbzg4Nm92azcycXBkNnRxYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bqSkJ4IwNcoZG/giphy.webp' alt='anime' width='128' height='64'>";
   html += "<br>";
   html += "</br>";
   html += "<button class=\"on\" onclick=\"location.href='/LEDamarelo=ON'\">Ligar LED Amarelo</button>";
